@@ -22,7 +22,7 @@ const AddButton = ({onClick}) => {
           box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
           margin-right: 2rem;
           margin-bottom: 2rem;
-          z-index: 2 ;
+          z-index: 3 ;
         }
 
         button:hover {

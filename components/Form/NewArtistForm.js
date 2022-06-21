@@ -103,6 +103,15 @@ const NewArtistForm = ({userData, closeModal, prevId, dayId}) => {
           border-radius: 15px;
           box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
           padding: 2rem;
+          z-index: 3;
+        }
+
+        @media (max-width: 768px) {
+          .new__Day__form {
+            width: 95%;
+            padding: 0;
+            margin-top: -3rem;
+          }
         }
 
         .new__Day__form__close {
@@ -110,6 +119,12 @@ const NewArtistForm = ({userData, closeModal, prevId, dayId}) => {
           display: flex;
           justify-content: flex-end;
           cursor: pointer ;
+        }
+
+        @media (max-width: 768px) {
+          .new__Day__form__close {
+            width: 100%;
+          }
         }
 
         .new__Day__form__title {
@@ -121,6 +136,12 @@ const NewArtistForm = ({userData, closeModal, prevId, dayId}) => {
           margin: 0;
         }
 
+        @media (max-width: 768px) {
+          .new__Day__form__title h2 {
+            font-size: 1.1rem !important;
+          }
+        }
+
         .new__Day__form__title p {
           margin: 0;
         }
@@ -130,6 +151,12 @@ const NewArtistForm = ({userData, closeModal, prevId, dayId}) => {
           margin: 1rem 0;
           display: flex ;
           flex-direction: column;
+        }
+
+        @media (max-width: 768px) {
+          .single__input {
+            margin: 8px 0;
+          }
         }
         `}</style>
     </>

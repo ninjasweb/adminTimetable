@@ -6,9 +6,8 @@ import Layout from '../components/Common/Layout'
 import Loading from '../components/Loading'
 import Home from '../components/pages/Home'
 
-
 export default function Index() {
-  const { user, loading, collectionGroup } = useUserContext()
+  const { user, loading } = useUserContext()
   const router = useRouter()
 
   if (loading) {
@@ -18,7 +17,6 @@ export default function Index() {
  if (user === null) {
    router.push('/login')
  }
-
 
   return (
     <div className={styles.container}>
