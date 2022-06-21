@@ -17,7 +17,6 @@ const NewStageForm = ({closeModal, userData , prevId}) => {
   //Initialize the validation schema
   const validationSchema = Yup.object().shape({
     name: Yup.string().required('El nombre es requerido'),
-    desc: Yup.string().required('La descripción es requerida'),
   })
 
   //Create an unique id for the day  
@@ -40,7 +39,7 @@ const NewStageForm = ({closeModal, userData , prevId}) => {
           <CloseIcon fontSize="large" />
         </div>
         <div className="new__stage__form__title">
-          <h2>{userData.id === undefined ? "Crear un nuevo stage" : "Editar Stage"}</h2>
+          <h2>{userData.id === undefined ? "Crear un nuevo stage/locación" : "Editar Stage"}</h2>
           <p>{userData.id === undefined ? "" : `Nombre: ${userData.name}`}</p>
         </div>
         <div className="new__stage__form__inputs">
@@ -54,7 +53,7 @@ const NewStageForm = ({closeModal, userData , prevId}) => {
             <Form>
               {/* Day Name */}
               <div className="single__input">
-                <TextFieldUI label="name" name="name" placeholder="Nombre del Stage"/>
+                <TextFieldUI label="name" name="name" placeholder="Nombre Stage/Locación"/>
               </div>
               {/* Day Description */}
               <div className="single__input">

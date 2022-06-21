@@ -39,7 +39,7 @@ const NewDayForm = ({closeModal, userData}) => {
           <CloseIcon fontSize="large" />
         </div>
         <div className="new__Day__form__title">
-          <h2>{userData.dayId === undefined ? "Crear un nuevo día" : "Editar día"}</h2>
+          <h2>{userData.dayId === undefined ? "Crear un nuevo día/evento" : "Editar día"}</h2>
           <p>{userData.dayId === undefined ? "" : `Nombre: ${userData.name}`}</p>
           <p>{userData.dayId === undefined ? "" : `Fecha: ${userData.date}`}</p>
         </div>

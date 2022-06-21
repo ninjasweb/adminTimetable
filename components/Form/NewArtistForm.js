@@ -20,7 +20,6 @@ const NewArtistForm = ({userData, closeModal, prevId, dayId}) => {
   }
   const validationSchema = Yup.object().shape({
     name: Yup.string().required('El nombre es requerido'),
-    genre: Yup.string().required('El género es requerido'),
     startTime: Yup.string().required('La hora de inicio es requerida'),
     endTime: Yup.string().required('La hora de fin es requerida'),
   })
