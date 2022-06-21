@@ -24,7 +24,7 @@ const NewDayForm = ({closeModal, userData}) => {
 
   // OnSubmit handler  // Initialize the validation schema
   const handleSubmit = async (values) => {
-    const dayId = values.name.toLowerCase().replace(/ /g, "-").concat(id)
+    const dayId = values.name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,"").replace(/ /g, "-").concat(id)
     if(userData.dayId === undefined) {
       await createDay(values.name, values.date, dayId)
     } else {

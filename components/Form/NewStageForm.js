@@ -25,7 +25,7 @@ const NewStageForm = ({closeModal, userData , prevId}) => {
 
   //OnSubmit handler
   const handleSubmit = async (values) => {
-    const id = values.name.toLowerCase().replace(/ /g, "-").concat(randomID)
+    const id = values.name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,"").replace(/ /g, "-").concat(randomID)
     if(userData.id === undefined) {
       await createStage(values.name, values.desc, id, prevId)
     } else {

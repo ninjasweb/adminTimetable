@@ -29,7 +29,7 @@ const NewArtistForm = ({userData, closeModal, prevId, dayId}) => {
   const randomId = Math.random().toString(36).substring(2, 5) + Math.random().toString(8).substring(2, 5)
 
   const handleSubmit = async (values) => {
-    const newId = values.name.toLowerCase().replace(/ /g, "-").concat(randomId)
+    const newId = values.name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,"").replace(/ /g, "-").concat(randomId)
     if (userData.id === undefined) {
       await createArtist({...values, id: newId}, prevId, dayId, newId)
     }
