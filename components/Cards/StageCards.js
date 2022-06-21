@@ -43,7 +43,7 @@ const StageCards = ({name, desc, id, prevId, handleModal}) => {
           rgba(0, 0, 0, 0.12) 0px 1px 8px 0px;
           border-radius: 15px;
           overflow: hidden ;
-          background-color: var(--gray);                   
+          background-color: #000;                   
         }
 
         .card__title {
@@ -53,11 +53,11 @@ const StageCards = ({name, desc, id, prevId, handleModal}) => {
           display: flex;
           justify-content: center;
           align-items: center;
-          color: #000;
+          color: #fff;
           text-align: center;
           border-radius: 15px 15px 0 0;
           cursor: pointer;
-          background-color: var(--gray) ;
+          background-color: #000 ;
         }
 
         .card__title p {
