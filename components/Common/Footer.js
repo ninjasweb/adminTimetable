@@ -21,6 +21,7 @@ const Footer = () => {
           bottom: 0;
           left: 0;
           padding: 0 2rem;
+          border-top: 1px solid #000 ;
         }
         .btn {
           width: max-content ;

@@ -46,6 +46,10 @@ const Home = () => {
           padding: 1rem;
           justify-items: center;
         }
+
+        .home__container p {
+          color: #fff;
+        }
         `}</style>
     </>
    )

@@ -6,6 +6,7 @@ import NewArtistForm from "../../components/Form/NewArtistForm"
 import { useUserContext } from "../../context/userContext"
 import { useRouter } from "next/router"
 import ArtistCard from "../../components/Cards/ArtistCard"
+import CircularProgress from '@mui/material/CircularProgress'
 
 const SingleStage = ({id}) => {
   const router = useRouter()
@@ -44,6 +45,7 @@ const SingleStage = ({id}) => {
             )
           }) :  
           <div className="loading">
+            <CircularProgress color="success"/>
             <p>Aún no has agregado ningún artista.</p>
           </div>
           }
@@ -60,6 +62,18 @@ const SingleStage = ({id}) => {
           grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
           grid-gap: 2rem;
           padding: 1rem 0.2rem 4rem 0.2rem;
+          justify-items: center;
+        }
+
+        .loading {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .stage__container .loading p {
+          color: #fff !important;
         }
         `}</style>
     </>

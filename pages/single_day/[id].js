@@ -53,6 +53,10 @@ const SingleDay = ({id}) => {
           justify-items: center;
           text-align: center;
         }
+
+        .loading p {
+          color: #fff;
+        }
         `}</style>
     </>
     
