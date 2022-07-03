@@ -7,14 +7,17 @@ import { useUserContext } from "../../context/userContext"
 import { useRouter } from "next/router"
 import ArtistCard from "../../components/Cards/ArtistCard"
 import CircularProgress from '@mui/material/CircularProgress'
+import DeleteAlert from "../../components/Common/DeleteAlert"
 
 const SingleStage = ({id}) => {
   const router = useRouter()
   const dayId = router.query.prevId
 
-  const {artists} = useUserContext()
+  const {artists, deleteArtist} = useUserContext()
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
   const [userData, setUserData] = useState(null)
+  const [artistData, setArtistData] = useState({})
 
 
   const handleModal = (values, prevId, uid, id) => {
@@ -26,6 +29,21 @@ const SingleStage = ({id}) => {
       uid: uid,
       id: id
     })
+  }
+
+  const handleDeleteModal = (e, artist, prevId, uid) => {
+    e.stopPropagation()
+    setArtistData({
+      artistId: artist,
+      prevId: prevId,
+      uid: uid
+    })
+    setIsDeleteModalOpen(!isDeleteModalOpen)
+  }
+
+  const handleDelete = () => {
+    deleteArtist(artistData.artistId, artistData.prevId, artistData.uid)
+    setIsDeleteModalOpen(!isDeleteModalOpen)
   }
 
   return (
@@ -41,6 +59,7 @@ const SingleStage = ({id}) => {
                 prevId={artist.prevId} 
                 uid={artist.uid}
                 handleModal={handleModal}
+                handleDeleteModal={handleDeleteModal}
               />
             )
           }) :  
@@ -50,7 +69,11 @@ const SingleStage = ({id}) => {
           </div>
           }
         </div>
+
         {isModalOpen ? <Modal><NewArtistForm prevId={id} dayId={dayId} userData={userData} closeModal={handleModal}/></Modal> : null}
+        
+        {isDeleteModalOpen ? <Modal><DeleteAlert handleDeleteModal={handleDeleteModal} handleDelete={handleDelete} /></Modal> : null}
+
         <AddButton onClick={handleModal}/>
       </Layout>
 

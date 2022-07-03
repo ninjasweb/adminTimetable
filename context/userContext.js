@@ -102,7 +102,6 @@ import {
   //Detele Day
 const deleteDay = async (dayId) => {
   console.log(dayId)
-  //e.stopPropagation()
   try {
     const collectionRef = collection(db, 'evento')
     const docRef = doc(collectionRef, dayId)
@@ -137,7 +136,6 @@ const deleteDay = async (dayId) => {
 }
   //Delete Stage
   const deleteStage = async (id, prevId) => {
-    //e.stopPropagation()
     try {
       const collectionRef = collection(db, 'evento', `/${prevId}/stages`)
       const docRef = doc(collectionRef, id)
@@ -183,9 +181,7 @@ const deleteDay = async (dayId) => {
 }
 
   //Delete Artist
-  const deleteArtist = async (id, prevId, uid, e) => {
-    //console.log(id, prevId, uid, e)
-    e.stopPropagation()
+  const deleteArtist = async (id, prevId, uid) => {
     try {
       const collectionRef = collection(db, 'evento', `/${uid}/stages/${prevId}/artist`)
       const docRef = doc(collectionRef, id)

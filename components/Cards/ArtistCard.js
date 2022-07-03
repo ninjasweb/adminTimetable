@@ -1,14 +1,13 @@
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
-import { useUserContext } from '../../context/userContext'
 
-const ArtistCard = ({artist, prevId, uid, handleModal}) => {
+const ArtistCard = ({artist, prevId, uid, handleModal, handleDeleteModal}) => {
   //console.log(artist)
-  const {deleteArtist} = useUserContext()
-  const handleDelete = (e) => {
-    e.stopPropagation()
-    deleteArtist(artist.id, prevId, uid, e)
-  }
+  // const {deleteArtist} = useUserContext()
+  // const handleDelete = (e) => {
+  //   e.stopPropagation()
+  //   deleteArtist(artist.id, prevId, uid, e)
+  // }
   return (
     <>
       <div className="artist__card">
@@ -21,7 +20,7 @@ const ArtistCard = ({artist, prevId, uid, handleModal}) => {
         </div>
         <div className="artist__card__buttons">
           <button className="btn" onClick={()=> handleModal(artist, prevId, uid, artist.id)}><EditIcon/> Edit</button>
-          <button className="btn delete" onClick={(e)=>handleDelete(e)}><DeleteIcon/> Delete</button>
+          <button className="btn delete" onClick={(e)=>handleDeleteModal(e, artist.id, prevId, uid)}><DeleteIcon/> Delete</button>
         </div>
       </div>
       <style jsx>{`
