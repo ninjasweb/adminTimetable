@@ -1,14 +1,8 @@
 import Link from 'next/link'
-import { useUserContext } from "../../context/userContext"
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
 
-const StageCards = ({name, desc, id, prevId, handleModal}) => {
-  const {deleteStage} = useUserContext()
-  const handleDelete = (e) => {
-    e.stopPropagation()
-    deleteStage(id, prevId, e)
-  }
+const StageCards = ({name, desc, id, prevId, handleModal, handleDeleteModal}) => {
 
   return (
     <>
@@ -28,7 +22,7 @@ const StageCards = ({name, desc, id, prevId, handleModal}) => {
         <div className="card__date">{desc}</div>
         <div className="card__controls">
           <button className="btn" onClick={()=> handleModal(name, desc, id)}><EditIcon/> Editar</button>
-          <button className="btn delete" onClick={(e)=> handleDelete(e)} ><DeleteIcon/> Eliminar</button>
+          <button className="btn delete" onClick={(e)=> handleDeleteModal(e, id, prevId)} ><DeleteIcon/> Eliminar</button>
         </div>
       </div>
       <style jsx>{`

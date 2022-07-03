@@ -136,8 +136,8 @@ const deleteDay = async (dayId) => {
   }
 }
   //Delete Stage
-  const deleteStage = async (id, prevId, e) => {
-    e.stopPropagation()
+  const deleteStage = async (id, prevId) => {
+    //e.stopPropagation()
     try {
       const collectionRef = collection(db, 'evento', `/${prevId}/stages`)
       const docRef = doc(collectionRef, id)

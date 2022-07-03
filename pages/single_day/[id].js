@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import StageCards from "../../components/Cards/StageCards"
 import AddButton from "../../components/Common/AddButton"
 import Layout from "../../components/Common/Layout"
@@ -6,11 +6,14 @@ import Modal from "../../components/Common/Modal"
 import NewStageForm from "../../components/Form/NewStageForm"
 import { useUserContext } from "../../context/userContext"
 import CircularProgress from '@mui/material/CircularProgress'
+import DeleteAlert from "../../components/Common/DeleteAlert"
 
 const SingleDay = ({id}) => {
-  const {singleDay, stages} = useUserContext()
+  const {singleDay, stages, deleteStage} = useUserContext()
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
   const [userData, setUserData] = useState({})
+  const [stageData, setStageData] = useState({})
 
   const handleModal = (name, desc, uid) => {
     setIsModalOpen(!isModalOpen)
@@ -22,6 +25,20 @@ const SingleDay = ({id}) => {
     })
   }
 
+  const handleDeleteModal = (e, id, prevId) => {
+    e.stopPropagation()
+    setStageData({
+      id: id,
+      prevId: prevId
+    })
+    setIsDeleteModalOpen(!isDeleteModalOpen)
+  }
+
+  const handleDelete = () => {
+    deleteStage(stageData.id, stageData.prevId)
+    setIsDeleteModalOpen(!isDeleteModalOpen)
+  }
+
   return (
     <>
       <Layout title={`Agrega los Stage a: ${singleDay && singleDay.name} (${singleDay && singleDay.date })`}>
@@ -29,7 +46,8 @@ const SingleDay = ({id}) => {
           {stages && stages.length > 0 ? stages.map((stage)=>{
             return (
               <StageCards 
-                handleModal={handleModal} 
+                handleModal={handleModal}
+                handleDeleteModal={handleDeleteModal}
                 key={stage.id} 
                 id={stage.id} 
                 name={stage.name} 
@@ -39,8 +57,12 @@ const SingleDay = ({id}) => {
             )
           }) :  <div className="loading"><CircularProgress color="success"/><p>Aún no has agregado ningún Stage.</p></div>}
         </div>
+
         {isModalOpen ? <Modal><NewStageForm prevId={id} userData={userData} closeModal={handleModal}  /></Modal> : null}
         <AddButton onClick={handleModal}/>
+
+        {isDeleteModalOpen ? <Modal><DeleteAlert handleDeleteModal={handleDeleteModal} handleDelete={handleDelete}/></Modal> : null} 
+
       </Layout>
       <style jsx>{`
         .single__day {
