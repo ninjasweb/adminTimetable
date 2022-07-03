@@ -7,19 +7,18 @@ import CloseIcon from '@mui/icons-material/Close'
 import { useUserContext } from "../../context/userContext"
 
 const NewDayForm = ({closeModal, userData}) => {
-  // Get the user context
+
   const { createDay, updateDay } = useUserContext()
-  // Initialize the formik state
+
   const INITIAL_FORM_STATE = {
-    name: "",
-    date: "",
+    name: userData.dayId === undefined ? "" : userData.name,
+    date: userData.dayId === undefined ? "" : userData.date,
   }
   const validationSchema = Yup.object().shape({
     name: Yup.string().required('El nombre es requerido'),
     date: Yup.date().typeError("La fecha es incorrecta").required('La fecha es obligatoria'),
   })
   //Create an unique id for the day  
-  //const id = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
   const id = Math.random().toString(36).substring(2, 5) + Math.random().toString(8).substring(2, 5)
 
   // OnSubmit handler  // Initialize the validation schema

@@ -21,7 +21,6 @@ const SingleStage = ({id}) => {
 
 
   const handleModal = (values, prevId, uid, id) => {
-    console.log(values, prevId, uid, id)
     setIsModalOpen(!isModalOpen)
     setUserData({
       values: values,

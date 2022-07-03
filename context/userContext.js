@@ -101,7 +101,6 @@ import {
 }
   //Detele Day
 const deleteDay = async (dayId) => {
-  console.log(dayId)
   try {
     const collectionRef = collection(db, 'evento')
     const docRef = doc(collectionRef, dayId)
@@ -181,17 +180,17 @@ const deleteDay = async (dayId) => {
 }
 
   //Delete Artist
-  const deleteArtist = async (id, prevId, uid) => {
-    try {
-      const collectionRef = collection(db, 'evento', `/${uid}/stages/${prevId}/artist`)
-      const docRef = doc(collectionRef, id)
-      await deleteDoc(docRef)
+  async function deleteArtist(id, prevId, uid) {
+      try {
+        const collectionRef = collection(db, 'evento', `/${uid}/stages/${prevId}/artist`)
+        const docRef = doc(collectionRef, id)
+        await deleteDoc(docRef)
+      }
+      catch (error) {
+        setLoading(false)
+        setError(error)
+      }
     }
-    catch (error) {
-      setLoading(false)
-      setError(error)
-    }
-  }
 
   //Update Artist
   const updateArtist = async (values, prevId, uid, id) => {

@@ -32,6 +32,7 @@ const Home = () => {
     deleteDay(eventId)
     setIsDeleteModalOpen(!isDeleteModalOpen)
   }
+
   
   return (
     <>

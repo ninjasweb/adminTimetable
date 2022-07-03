@@ -7,12 +7,11 @@ import * as Yup from 'yup'
 import { useUserContext } from '../../context/userContext'
 
 const NewStageForm = ({closeModal, userData , prevId}) => {
-  // Get the user context
+
   const {createStage, updateStage} = useUserContext()
-  //Initialize the formik state
   const INITIAL_FORM_STATE = {
-    name: "",
-    desc: "",
+    name: userData.id === undefined ? "" : userData.name,
+    desc: userData.id === undefined ? "" : userData.desc,
   }
   //Initialize the validation schema
   const validationSchema = Yup.object().shape({

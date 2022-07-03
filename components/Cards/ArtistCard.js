@@ -19,7 +19,7 @@ const ArtistCard = ({artist, prevId, uid, handleModal, handleDeleteModal}) => {
           <p>End Time: <b>{artist.endTime}</b></p>
         </div>
         <div className="artist__card__buttons">
-          <button className="btn" onClick={()=> handleModal(artist, prevId, uid, artist.id)}><EditIcon/> Edit</button>
+          <button className="btn" onClick={()=> handleModal(artist, prevId, uid, artist.id)}><EditIcon/> Editar</button>
           <button className="btn delete" onClick={(e)=>handleDeleteModal(e, artist.id, prevId, uid)}><DeleteIcon/> Delete</button>
         </div>
       </div>

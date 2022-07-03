@@ -8,15 +8,16 @@ import { useUserContext } from '../../context/userContext'
 
 
 const NewArtistForm = ({userData, closeModal, prevId, dayId}) => {
-  console.log(userData)
   const { createArtist, updateArtist } = useUserContext()
 
+  console.log(userData)
+
   const INITIAL_FORM_STATE = {
-    name: "",
-    perfomance: "",
-    genre: "",
-    startTime: "",
-    endTime: "",
+    name: userData.id === undefined ? "" : userData.values.name,
+    perfomance: userData.id === undefined ? "" : userData.values.perfomance,
+    genre: userData.id === undefined ? "" : userData.values.genre,
+    startTime: userData.id === undefined ? "" : userData.values.startTime,
+    endTime: userData.id === undefined ? "" : userData.values.endTime,
   }
   const validationSchema = Yup.object().shape({
     name: Yup.string().required('El nombre es requerido'),

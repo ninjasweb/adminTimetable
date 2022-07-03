@@ -13,12 +13,12 @@ const DatePickerUI = ({
   value,
   ...otherProps
 }) => {
-  const [date, setDate] = useState(value)
+  //const [date, setDate] = useState(value)
   const [field, meta] = useField(name)
   const { setFieldValue } = useFormikContext()
   const handleDateChange = (value) => {
     setFieldValue('date', moment(value).format('YYYY-MM-DD'))
-    setDate(value)
+    //setDate(value)
   }
   const configDatePicker = {
     ...field,
@@ -26,7 +26,7 @@ const DatePickerUI = ({
     type: 'date',
     fullWidth: true,
     onChange: handleDateChange,
-    value: date,
+    //value: date,
     defaultValue : null,
   }
   if (meta && meta.touched && meta.error) {
