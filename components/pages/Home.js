@@ -2,13 +2,16 @@ import { useState } from "react"
 import { useUserContext } from "../../context/userContext"
 import DayCard from "../Cards/DayCard"
 import AddButton from "../Common/AddButton"
+import DeleteAlert from "../Common/DeleteAlert"
 import Modal from "../Common/Modal"
 import NewDayForm from "../Form/NewDayForm"
 
 const Home = () => {
-  const {collectionGroup } = useUserContext()
+  const {collectionGroup, deleteDay } = useUserContext()
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
   const [userData, setUserData] = useState({})
+  const [eventId , setEventId] = useState(null)
 
   const handleModal = (name, date, dayId) => {
     setIsModalOpen(!isModalOpen)
@@ -18,6 +21,17 @@ const Home = () => {
       dayId: dayId,
     })
   }
+
+  const handleDeleteModal = (e, dayId) => {
+    e.stopPropagation()
+    setEventId(dayId)
+    setIsDeleteModalOpen(!isDeleteModalOpen)
+  }
+
+  const handleDelete = () => {
+    deleteDay(eventId)
+    setIsDeleteModalOpen(!isDeleteModalOpen)
+  }
   
   return (
     <>
@@ -26,15 +40,20 @@ const Home = () => {
           return (
             <DayCard 
               handleModal={handleModal} 
+              handleDeleteModal={handleDeleteModal}
               key={event.dayId} 
               dayId={event.dayId} 
               name={event.name} 
-              date={event.date}/>
+              date={event.date}
+              />
           )
         }) : <p>Aún no has agregado ningún evento.</p>
       }
         {isModalOpen ? <Modal><NewDayForm userData={userData} closeModal={handleModal} /></Modal> : null}
         <AddButton onClick={handleModal}/>
+
+        {isDeleteModalOpen ? <Modal><DeleteAlert handleDeleteModal={handleDeleteModal} handleDelete={handleDelete}/></Modal> : null}
+
       </div>
       <style jsx>{`
         .home__container {

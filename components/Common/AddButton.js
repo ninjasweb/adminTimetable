@@ -23,10 +23,12 @@ const AddButton = ({onClick}) => {
           margin-right: 2rem;
           margin-bottom: 2rem;
           z-index: 3 ;
+          border: 1px solid var(--green);
         }
 
         button:hover {
           box-shadow: none;
+          border: 1px solid #000;
         }
         `}</style>
     </>

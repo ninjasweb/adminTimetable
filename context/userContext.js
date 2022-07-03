@@ -100,9 +100,9 @@ import {
   }
 }
   //Detele Day
-const deleteDay = async (dayId, e) => {
+const deleteDay = async (dayId) => {
   console.log(dayId)
-  e.stopPropagation()
+  //e.stopPropagation()
   try {
     const collectionRef = collection(db, 'evento')
     const docRef = doc(collectionRef, dayId)

@@ -1,14 +1,8 @@
-import { useUserContext } from "../../context/userContext"
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
 import Link from 'next/link'
 
-const DayCard = ({name, date, dayId, handleModal}) => { 
-  const {deleteDay} = useUserContext()
-  const handleDelete = (e) => {
-    e.stopPropagation()
-    deleteDay(dayId, e)
-  }
+const DayCard = ({name, date, dayId, handleModal, handleDeleteModal}) => { 
   return ( 
     <>
       <div className="card">
@@ -18,7 +12,7 @@ const DayCard = ({name, date, dayId, handleModal}) => {
         <div className="card__date">{date}</div>
         <div className="card__controls">
           <button className="btn" onClick={()=> handleModal(name, date, dayId)}><EditIcon/> Editar</button>
-          <button className="btn delete" onClick={(e)=> handleDelete(e)} ><DeleteIcon/> Eliminar</button>
+          <button className="btn delete" onClick={(e)=> handleDeleteModal(e, dayId)} ><DeleteIcon/> Eliminar</button>
         </div>
       </div>
       <style jsx>{`
@@ -73,8 +67,6 @@ const DayCard = ({name, date, dayId, handleModal}) => {
           font-size: 1rem !important;
           margin: 0 5px;
         }
-
-
         `}</style>
     </>
    );
