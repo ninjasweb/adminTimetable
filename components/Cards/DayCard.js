@@ -28,6 +28,12 @@ const DayCard = ({name, date, dayId, handleModal, handleDeleteModal}) => {
           border-radius: 15px;
           overflow: hidden ;   
           background-color: #000;
+          border: 1px solid transparent;
+        }
+
+        .card:hover {
+          border: 1px solid var(--green);
+          box-shadow: none,
         }
 
         .card__title {

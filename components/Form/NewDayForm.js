@@ -58,7 +58,7 @@ const NewDayForm = ({closeModal, userData}) => {
               </div>
               {/* Day Date */}
               <div className="single__input">
-                <DatePickerUI label="date" name="date"/>
+                <DatePickerUI label="Fecha" name="date"/>
               </div>
               {/* Create Day */}
               <div className="single__input">

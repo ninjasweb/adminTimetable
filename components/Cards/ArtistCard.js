@@ -2,19 +2,13 @@ import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
 
 const ArtistCard = ({artist, prevId, uid, handleModal, handleDeleteModal}) => {
-  //console.log(artist)
-  // const {deleteArtist} = useUserContext()
-  // const handleDelete = (e) => {
-  //   e.stopPropagation()
-  //   deleteArtist(artist.id, prevId, uid, e)
-  // }
   return (
     <>
       <div className="artist__card">
+        <h2>{artist.name}</h2>
         <div className="artist__card__title">
-          <h2>{artist.name}</h2>
-          <p>Perfomance: <b>{artist.perfomance}</b></p>
-          <p>Genre: <b>{artist.genre}</b></p>
+          <p>Perfomance: <b><br></br>{artist.perfomance}</b></p>
+          <p>Genre: <b><br></br>{artist.genre}</b></p>
           <p>Start Time: <b>{artist.startTime}</b></p>
           <p>End Time: <b>{artist.endTime}</b></p>
         </div>
@@ -36,7 +30,18 @@ const ArtistCard = ({artist, prevId, uid, handleModal, handleDeleteModal}) => {
           background: #fff;
           border-radius: 15px;
           box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
-          padding: 1rem;
+          padding: 0.3rem;
+        }
+
+        .artist__card__title {
+          width: 100%;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          margin-bottom: 1rem;
+        }
+        
+        .artist__card__title > p {
+          margin: 0;
         }
 
         .artist__card__buttons {

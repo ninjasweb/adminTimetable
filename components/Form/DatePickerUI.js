@@ -23,6 +23,7 @@ const DatePickerUI = ({
   const configDatePicker = {
     ...field,
     ...otherProps,
+    label: label,
     type: 'date',
     fullWidth: true,
     onChange: handleDateChange,
