@@ -85,6 +85,7 @@ const SingleStage = ({id}) => {
           grid-gap: 2rem;
           padding: 1rem 0.2rem 4rem 0.2rem;
           justify-items: center;
+          padding-bottom: 4rem;
         }
 
         .loading {

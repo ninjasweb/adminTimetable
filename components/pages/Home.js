@@ -32,7 +32,6 @@ const Home = () => {
     deleteDay(eventId)
     setIsDeleteModalOpen(!isDeleteModalOpen)
   }
-
   
   return (
     <>
@@ -65,6 +64,7 @@ const Home = () => {
           grid-gap: 1rem;
           padding: 1rem;
           justify-items: center;
+          padding-bottom: 4rem;
         }
 
         .home__container p {

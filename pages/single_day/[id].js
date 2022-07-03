@@ -74,6 +74,7 @@ const SingleDay = ({id}) => {
           padding: 1rem;
           justify-items: center;
           text-align: center;
+          padding-bottom: 4rem;
         }
 
         .loading p {
