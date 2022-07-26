@@ -9,11 +9,13 @@ import { useState } from "react"
 
 const NewDayForm = ({closeModal, userData}) => {
 
+
   const { createDay, updateDay } = useUserContext()
   const [disabledButton , setDisabledButton] = useState(false)
 
   const INITIAL_FORM_STATE = {
     name: userData.dayId === undefined ? "" : userData.name,
+    desc: userData.dayId === undefined ? "" : userData.desc,
     date: userData.dayId === undefined ? "" : userData.date,
   }
   const validationSchema = Yup.object().shape({
@@ -28,9 +30,9 @@ const NewDayForm = ({closeModal, userData}) => {
     setDisabledButton(true)
     const dayId = values.name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,"").replace(/ /g, "-").concat(id)
     if(userData.dayId === undefined) {
-      await createDay(values.name, values.date, dayId)
+      await createDay(values.name, values.date, values.desc, dayId)
     } else {
-      await updateDay(values.name, values.date, userData.dayId)
+      await updateDay(values.name, values.date, values.desc, userData.dayId)
     }
     closeModal()
   }
@@ -50,13 +52,18 @@ const NewDayForm = ({closeModal, userData}) => {
             initialValues={INITIAL_FORM_STATE}
             validationSchema={validationSchema}
             onSubmit={values =>{
+              console.log(values)
               handleSubmit(values)
             }}
           >
             <Form>
               {/* Day Name */}
               <div className="single__input">
-                <TextFieldUI label="nombre" name="name" placeholder="Nombre del día"/>
+                <TextFieldUI label="Nombre" name="name" placeholder="Nombre del día/evento"/>
+              </div>
+              {/* Description Day */}
+              <div className="single__input">
+                <TextFieldUI label="Descripción" name="desc" placeholder="Descripción"/>
               </div>
               {/* Day Date */}
               <div className="single__input">

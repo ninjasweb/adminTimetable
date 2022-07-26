@@ -2,7 +2,7 @@ import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
 import Link from 'next/link'
 
-const DayCard = ({name, date, dayId, handleModal, handleDeleteModal}) => { 
+const DayCard = ({name, date, desc, dayId, handleModal, handleDeleteModal}) => { 
   return ( 
     <>
       <div className="card">
@@ -11,7 +11,7 @@ const DayCard = ({name, date, dayId, handleModal, handleDeleteModal}) => {
         </Link>
         <div className="card__date">{date}</div>
         <div className="card__controls">
-          <button className="btn" onClick={()=> handleModal(name, date, dayId)}><EditIcon/> Editar</button>
+          <button className="btn" onClick={()=> handleModal(name, date, desc, dayId)}><EditIcon/> Editar</button>
           <button className="btn delete" onClick={(e)=> handleDeleteModal(e, dayId)} ><DeleteIcon/> Eliminar</button>
         </div>
       </div>

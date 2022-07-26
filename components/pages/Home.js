@@ -13,10 +13,11 @@ const Home = () => {
   const [userData, setUserData] = useState({})
   const [eventId , setEventId] = useState(null)
 
-  const handleModal = (name, date, dayId) => {
+  const handleModal = (name, date, desc, dayId) => {
     setIsModalOpen(!isModalOpen)
     setUserData({
       name: name,
+      desc: desc,
       date: date,
       dayId: dayId,
     })
@@ -43,7 +44,8 @@ const Home = () => {
               handleDeleteModal={handleDeleteModal}
               key={event.dayId} 
               dayId={event.dayId} 
-              name={event.name} 
+              name={event.name}
+              desc={event.desc}
               date={event.date}
               />
           )
