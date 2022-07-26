@@ -5,12 +5,12 @@ import ButtonPrimary from '../Common/ButtonPrimary'
 import * as Yup from 'yup'
 import TimePickerUI from './TimePickerUI'
 import { useUserContext } from '../../context/userContext'
+import { useState } from 'react'
 
 
 const NewArtistForm = ({userData, closeModal, prevId, dayId}) => {
   const { createArtist, updateArtist } = useUserContext()
-
-  console.log(userData)
+  const [disabledButton, setDisabledButton] = useState(false)
 
   const INITIAL_FORM_STATE = {
     name: userData.id === undefined ? "" : userData.values.name,
@@ -29,6 +29,7 @@ const NewArtistForm = ({userData, closeModal, prevId, dayId}) => {
   const randomId = Math.random().toString(36).substring(2, 5) + Math.random().toString(8).substring(2, 5)
 
   const handleSubmit = async (values) => {
+    setDisabledButton(true)
     const newId = values.name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,"").replace(/ /g, "-").concat(randomId)
     if (userData.id === undefined) {
       await createArtist({...values, id: newId}, prevId, dayId, newId)
@@ -82,7 +83,7 @@ const NewArtistForm = ({userData, closeModal, prevId, dayId}) => {
               {/* Create Artist */}
               <div className="single__input">
                 {userData && userData.id === undefined ? 
-                  <ButtonPrimary>AGREGAR ARTISTA</ButtonPrimary> : 
+                  <ButtonPrimary disabled={disabledButton}>AGREGAR ARTISTA</ButtonPrimary> : 
                   <ButtonPrimary>ACTUALIZAR ARTISTA</ButtonPrimary>
                 }
               </div>

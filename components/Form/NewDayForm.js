@@ -5,10 +5,12 @@ import DatePickerUI from "./DatePickerUI"
 import ButtonPrimary from "../Common/ButtonPrimary"
 import CloseIcon from '@mui/icons-material/Close'
 import { useUserContext } from "../../context/userContext"
+import { useState } from "react"
 
 const NewDayForm = ({closeModal, userData}) => {
 
   const { createDay, updateDay } = useUserContext()
+  const [disabledButton , setDisabledButton] = useState(false)
 
   const INITIAL_FORM_STATE = {
     name: userData.dayId === undefined ? "" : userData.name,
@@ -23,6 +25,7 @@ const NewDayForm = ({closeModal, userData}) => {
 
   // OnSubmit handler  // Initialize the validation schema
   const handleSubmit = async (values) => {
+    setDisabledButton(true)
     const dayId = values.name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,"").replace(/ /g, "-").concat(id)
     if(userData.dayId === undefined) {
       await createDay(values.name, values.date, dayId)
@@ -47,7 +50,6 @@ const NewDayForm = ({closeModal, userData}) => {
             initialValues={INITIAL_FORM_STATE}
             validationSchema={validationSchema}
             onSubmit={values =>{
-              console.log(values)
               handleSubmit(values)
             }}
           >
@@ -63,7 +65,7 @@ const NewDayForm = ({closeModal, userData}) => {
               {/* Create Day */}
               <div className="single__input">
                 {userData && userData.dayId === undefined ? 
-                  <ButtonPrimary>AGREGAR DÍA</ButtonPrimary> : 
+                  <ButtonPrimary disabled={disabledButton}>AGREGAR DÍA</ButtonPrimary> : 
                   <ButtonPrimary>ACTUALIZAR DÍA</ButtonPrimary>
                 }
               </div>

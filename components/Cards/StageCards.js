@@ -37,7 +37,11 @@ const StageCards = ({name, desc, id, prevId, handleModal, handleDeleteModal}) =>
           rgba(0, 0, 0, 0.12) 0px 1px 8px 0px;
           border-radius: 15px;
           overflow: hidden ;
-          background-color: #000;                   
+          background-color: #000;
+          border: 1px solid transparent;                  
+        }
+        .card:hover {
+          border: 1px solid var(--green);
         }
 
         .card__title {
@@ -62,7 +66,6 @@ const StageCards = ({name, desc, id, prevId, handleModal, handleDeleteModal}) =>
           margin: 0;
         }
 
-
         .card__date {
           width: 100%;
           height: 25%;
@@ -86,7 +89,6 @@ const StageCards = ({name, desc, id, prevId, handleModal, handleDeleteModal}) =>
           font-size: 1rem !important;
           margin: 0 5px;
         }
-
         `}</style>
     </> 
     

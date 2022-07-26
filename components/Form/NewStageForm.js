@@ -1,14 +1,15 @@
 import CloseIcon from '@mui/icons-material/Close'
 import { Formik, Form } from 'formik'
-import DatePickerUI from './DatePickerUI'
 import ButtonPrimary from '../Common/ButtonPrimary'
 import TextFieldUI from './TextFieldUI'
 import * as Yup from 'yup'
 import { useUserContext } from '../../context/userContext'
+import { useState } from 'react'
 
 const NewStageForm = ({closeModal, userData , prevId}) => {
 
   const {createStage, updateStage} = useUserContext()
+  const [disabledButton, setDisabledButton] = useState(false)
   const INITIAL_FORM_STATE = {
     name: userData.id === undefined ? "" : userData.name,
     desc: userData.id === undefined ? "" : userData.desc,
@@ -23,6 +24,7 @@ const NewStageForm = ({closeModal, userData , prevId}) => {
 
   //OnSubmit handler
   const handleSubmit = async (values) => {
+    setDisabledButton(true)
     const id = values.name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,"").replace(/ /g, "-").concat(randomID)
     if(userData.id === undefined) {
       await createStage(values.name, values.desc, id, prevId)
@@ -61,7 +63,7 @@ const NewStageForm = ({closeModal, userData , prevId}) => {
               {/* Create Day */}
               <div className="single__input">
                 {userData && userData.id === undefined ? 
-                  <ButtonPrimary>AGREGAR STAGE</ButtonPrimary> : 
+                  <ButtonPrimary disabled={disabledButton}>AGREGAR STAGE</ButtonPrimary> : 
                   <ButtonPrimary>ACTUALIZAR STAGE</ButtonPrimary>
                 }
               </div>
