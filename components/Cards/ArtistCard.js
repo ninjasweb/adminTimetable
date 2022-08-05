@@ -1,11 +1,11 @@
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
 
-const ArtistCard = ({artist, prevId, uid, handleModal, handleDeleteModal}) => {
+const ArtistCard = ({artist, prevId, uid, handleModal, handleDeleteModal, index}) => {
   return (
     <>
       <div className="artist__card">
-        <h2>{artist.name}</h2>
+        <h2>{artist.name} {index}</h2>
         <div className="artist__card__title">
           <p>Perfomance: <b><br></br>{artist.perfomance}</b></p>
           <p>Genre: <b><br></br>{artist.genre}</b></p>
@@ -31,6 +31,7 @@ const ArtistCard = ({artist, prevId, uid, handleModal, handleDeleteModal}) => {
           border-radius: 15px;
           box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
           padding: 0.3rem;
+          margin-top: 1rem;
         }
 
         .artist__card__title {

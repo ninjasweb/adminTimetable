@@ -19,6 +19,8 @@ const SingleStage = ({id}) => {
   const [userData, setUserData] = useState(null)
   const [artistData, setArtistData] = useState({})
 
+  console.log(artists)
+
 
   const handleModal = (values, prevId, uid, id) => {
     setIsModalOpen(!isModalOpen)
@@ -51,9 +53,11 @@ const SingleStage = ({id}) => {
         <div className="stage__container">
           {
           artists && artists.length > 0 ? artists.map((artist, key)=>{
+            console.log(key)
             return (
               <ArtistCard 
-                key={key} 
+                key={key}
+                index={key}
                 artist={artist.values} 
                 prevId={artist.prevId} 
                 uid={artist.uid}
@@ -80,11 +84,10 @@ const SingleStage = ({id}) => {
         .stage__container {
           width: 100%;
           height: 100%;
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-          grid-gap: 2rem;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
           padding: 1rem 0.2rem 4rem 0.2rem;
-          justify-items: center;
           padding-bottom: 4rem;
         }
 
