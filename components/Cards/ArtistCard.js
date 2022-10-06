@@ -5,7 +5,7 @@ const ArtistCard = ({artist, prevId, uid, handleModal, handleDeleteModal, index}
   return (
     <>
       <div className="artist__card">
-        <h2>{artist.name} {index}</h2>
+        <h2>{artist.name}</h2>
         <div className="artist__card__title">
           <p>Perfomance: <b><br></br>{artist.perfomance}</b></p>
           <p>Genre: <b><br></br>{artist.genre}</b></p>

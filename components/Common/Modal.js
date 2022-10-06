@@ -7,7 +7,7 @@ const Modal = ({children}) => {
       <style jsx>{`
         .modal {
           width: 100vw;
-          height: 100vh;
+          height: 100%;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -15,6 +15,7 @@ const Modal = ({children}) => {
           position: fixed;
           top: 0;
           left: 0;
+          z-index: 4;
         }
         `}</style>
     </>

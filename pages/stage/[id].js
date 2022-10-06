@@ -19,8 +19,6 @@ const SingleStage = ({id}) => {
   const [userData, setUserData] = useState(null)
   const [artistData, setArtistData] = useState({})
 
-  console.log(artists)
-
 
   const handleModal = (values, prevId, uid, id) => {
     setIsModalOpen(!isModalOpen)
@@ -53,7 +51,6 @@ const SingleStage = ({id}) => {
         <div className="stage__container">
           {
           artists && artists.length > 0 ? artists.map((artist, key)=>{
-            console.log(key)
             return (
               <ArtistCard 
                 key={key}
