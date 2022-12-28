@@ -1,17 +1,23 @@
 import CloseIcon from '@mui/icons-material/Close'
-import {Formik, Form} from 'formik'
+import {Formik, Form, useField} from 'formik'
 import TextFieldUI from './TextFieldUI'
 import ButtonPrimary from '../Common/ButtonPrimary'
 import * as Yup from 'yup'
 import TimePickerUI from './TimePickerUI'
 import { useUserContext } from '../../context/userContext'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {storage} from '../../firebase/initFirebase'
 import { ref, uploadBytes } from 'firebase/storage'
 import UploadIcon from '@mui/icons-material/Upload'
 import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel'
+import FormControl from '@mui/material/FormControl'
+import InputLabel from '@mui/material/InputLabel'
+import Select from '@mui/material/Select'
+import Checkbox from '@mui/material/Checkbox'
+import { MenuItem } from '@mui/material'
+import { countryCodes } from '../../data/countryCodes'
+import SelectFieldUI from './SelectFieldUI'
 
 
 const NewArtistForm = ({userData, closeModal, prevId, dayId}) => {
@@ -21,8 +27,9 @@ const NewArtistForm = ({userData, closeModal, prevId, dayId}) => {
   const [createObjectURL, setCreateObjectURL] = useState("")
   const [checkedEnd, setCheckedEnd] = useState(false)
   const [checkedStart, setCheckedStart] = useState(false)
+  const [checkedCountry, setCheckedCountry] = useState("")
 
-  console.log(userData)
+
 
   const uploadToClient = (e) => {
     if(e.target.files && e.target.files[0]) {
@@ -39,6 +46,7 @@ const NewArtistForm = ({userData, closeModal, prevId, dayId}) => {
     genre: userData.id === undefined ? "" : userData.values.genre,
     startTime: userData.id === undefined ? "" : userData.values.startTime,
     endTime: userData.id === undefined ? "" : userData.values.endTime,
+    country: userData.id === undefined ? "" : userData.values.country,
   }
   const validationSchema = Yup.object().shape({
     name: Yup.string().required('El nombre es requerido'),
@@ -51,7 +59,6 @@ const NewArtistForm = ({userData, closeModal, prevId, dayId}) => {
 
   const handleSubmit = async (values) => {
     setDisabledButton(true)
-    
     const newId = values.name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,"").replace(/ /g, "-").concat(randomId)
     if (userData.id === undefined) {
       await createArtist({...values, id: newId, nextDayEnd: checkedEnd, nextDayStart: checkedStart   }, prevId, dayId, newId)
@@ -68,7 +75,6 @@ const NewArtistForm = ({userData, closeModal, prevId, dayId}) => {
       }
     setDisabledButton(true)
     }
-    
     closeModal()
   }
   const hanldeCheckBox = (e) => {
@@ -76,6 +82,9 @@ const NewArtistForm = ({userData, closeModal, prevId, dayId}) => {
   }
   const handleCheckBoxStart = (e) => {
     setCheckedStart(e.target.checked)
+  }
+  const handleChange = (e) => {
+    setCheckedCountry(e.target.value)
   }
   return ( 
     <>
@@ -109,6 +118,14 @@ const NewArtistForm = ({userData, closeModal, prevId, dayId}) => {
               {/* Genre */}
               <div className="single__input">
                 <TextFieldUI label="Género" name="genre" placeholder="Género del Artista"/>
+              </div>
+              {/* Country */}
+              <div className="single__input">
+                <SelectFieldUI 
+                  name="country" 
+                  label="País"
+                  countryCodes={countryCodes}
+                />
               </div>
               {/* Start Time */}
               <div className="single__input">
