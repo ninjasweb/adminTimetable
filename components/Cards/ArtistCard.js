@@ -9,8 +9,8 @@ const ArtistCard = ({artist, prevId, uid, handleModal, handleDeleteModal, index}
         <div className="artist__card__title">
           <p>Perfomance: <b><br></br>{artist.perfomance}</b></p>
           <p>Genre: <b><br></br>{artist.genre}</b></p>
-          <p>Start Time: <b>{artist.startTime}</b></p>
-          <p>End Time: <b>{artist.endTime}</b></p>
+          <p>Start Time: <b>{artist.initialHours}</b></p>
+          <p>End Time: <b>{artist.finalHours}</b></p>
         </div>
         <div className="artist__card__buttons">
           <button className="btn" onClick={()=> handleModal(artist, prevId, uid, artist.id)}><EditIcon/> Editar</button>

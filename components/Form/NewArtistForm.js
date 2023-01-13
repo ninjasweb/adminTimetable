@@ -1,23 +1,16 @@
 import CloseIcon from '@mui/icons-material/Close'
-import {Formik, Form, useField} from 'formik'
+import {Formik, Form} from 'formik'
 import TextFieldUI from './TextFieldUI'
 import ButtonPrimary from '../Common/ButtonPrimary'
 import * as Yup from 'yup'
-import TimePickerUI from './TimePickerUI'
 import { useUserContext } from '../../context/userContext'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import {storage} from '../../firebase/initFirebase'
 import { ref, uploadBytes } from 'firebase/storage'
 import UploadIcon from '@mui/icons-material/Upload'
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel'
-import FormControl from '@mui/material/FormControl'
-import InputLabel from '@mui/material/InputLabel'
-import Select from '@mui/material/Select'
-import Checkbox from '@mui/material/Checkbox'
-import { MenuItem } from '@mui/material'
 import { countryCodes } from '../../data/countryCodes'
 import SelectFieldUI from './SelectFieldUI'
+import DatePickerUI from './DatePickerUI'
 
 
 const NewArtistForm = ({userData, closeModal, prevId, dayId}) => {
@@ -25,10 +18,6 @@ const NewArtistForm = ({userData, closeModal, prevId, dayId}) => {
   const [disabledButton, setDisabledButton] = useState(false)
   const [image, setImage] = useState(null)
   const [createObjectURL, setCreateObjectURL] = useState("")
-  const [checkedEnd, setCheckedEnd] = useState(false)
-  const [checkedStart, setCheckedStart] = useState(false)
-  const [checkedCountry, setCheckedCountry] = useState("")
-
 
 
   const uploadToClient = (e) => {
@@ -44,14 +33,14 @@ const NewArtistForm = ({userData, closeModal, prevId, dayId}) => {
     name: userData.id === undefined ? "" : userData.values.name,
     perfomance: userData.id === undefined ? "" : userData.values.perfomance,
     genre: userData.id === undefined ? "" : userData.values.genre,
-    startTime: userData.id === undefined ? "" : userData.values.startTime,
-    endTime: userData.id === undefined ? "" : userData.values.endTime,
     country: userData.id === undefined ? "" : userData.values.country,
+    initialDay: userData.id === undefined ? "" : userData.values.initialDay,
+    finalDay: userData.id === undefined ? "" : userData.values.finalDay,
   }
   const validationSchema = Yup.object().shape({
     name: Yup.string().required('El nombre es requerido'),
-    startTime: Yup.string().required('La hora de inicio es requerida'),
-    endTime: Yup.string().required('La hora de fin es requerida'),
+    initialDay: Yup.string().required('La fecha de inicio es requerida'),
+    finalDay: Yup.string().required('La fecha de finalización es requerida'),
   })
 
   //Create an unique id for the day  
@@ -61,14 +50,14 @@ const NewArtistForm = ({userData, closeModal, prevId, dayId}) => {
     setDisabledButton(true)
     const newId = values.name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,"").replace(/ /g, "-").concat(randomId)
     if (userData.id === undefined) {
-      await createArtist({...values, id: newId, nextDayEnd: checkedEnd, nextDayStart: checkedStart   }, prevId, dayId, newId)
+      await createArtist({...values, id: newId, initialHours: values.initialDay.split(" ")[1], finalHours: values.finalDay.split(" ")[1] }, prevId, dayId, newId)
       if(image) {
         const imageRef = ref(storage, `medellinstyle/${newId}`)
         await uploadBytes(imageRef, image)
       }
     }
     else {
-      await updateArtist({...values, id: userData.id, nextDayEnd: checkedEnd, nextDayStart: checkedStart }, prevId, dayId, userData.id)
+      await updateArtist({...values, id: userData.id, initialHours: values.initialDay.split(" ")[1], finalHours: values.finalDay.split(" ")[1]}, prevId, dayId, userData.id)
       if(image) {
         const imageRef = ref(storage, `medellinstyle/${userData.id}`)
         await uploadBytes(imageRef, image)
@@ -76,15 +65,6 @@ const NewArtistForm = ({userData, closeModal, prevId, dayId}) => {
     setDisabledButton(true)
     }
     closeModal()
-  }
-  const hanldeCheckBox = (e) => {
-    setCheckedEnd(e.target.checked)
-  }
-  const handleCheckBoxStart = (e) => {
-    setCheckedStart(e.target.checked)
-  }
-  const handleChange = (e) => {
-    setCheckedCountry(e.target.value)
   }
   return ( 
     <>
@@ -127,25 +107,15 @@ const NewArtistForm = ({userData, closeModal, prevId, dayId}) => {
                   countryCodes={countryCodes}
                 />
               </div>
-              {/* Start Time */}
+              {/* Init Day */}
               <div className="single__input">
-                <label htmlFor="startTime">Hora inicio</label>
-                <TimePickerUI  name="startTime" label="Hora de Inicio"/>
+                <label htmlFor="initDay">Día de Inicio</label>
+                <DatePickerUI name="initialDay" label=""/>
               </div>
-              {/* Next Day Start? */}
-              <FormGroup>
-                <FormControlLabel control={<Checkbox onChange={handleCheckBoxStart} />} label="¿Inicia el día siguiente?" />
-              </FormGroup>
-              {/* End Time */}
+              {/* End Day */}
               <div className="single__input">
-                <label htmlFor="endTime">Hora fin</label>
-                <TimePickerUI name="endTime" label="Hora de Finalización"/>
-              </div>
-              {/* Next Day End? */}
-              <div className="single__input">
-              <FormGroup>
-                <FormControlLabel control={<Checkbox onChange={hanldeCheckBox} />} label="¿Termina el día siguiente?" />
-              </FormGroup>
+                <label htmlFor="endDay">Día de Finalización</label>
+                <DatePickerUI name="finalDay" label=""/>
               </div>
               {/* Add Image Profile picture */}
               <div className="single__input image_input">
