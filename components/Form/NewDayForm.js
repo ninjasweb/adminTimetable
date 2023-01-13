@@ -9,7 +9,6 @@ import { useState } from "react"
 
 const NewDayForm = ({closeModal, userData}) => {
 
-
   const { createDay, updateDay } = useUserContext()
   const [disabledButton , setDisabledButton] = useState(false)
 

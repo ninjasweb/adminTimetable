@@ -6,8 +6,10 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import moment from 'moment'
 import FormHelperText from '@mui/material/FormHelperText'
 import { useState } from 'react'
+import { DateTimePicker } from '@mui/x-date-pickers'
 
-const DatePickerUI = ({
+
+const DateTimePickerUI = ({
   name,
   label,
   value,
@@ -17,7 +19,7 @@ const DatePickerUI = ({
   const [field, meta] = useField(name)
   const { setFieldValue } = useFormikContext()
   const handleDateChange = (value) => {
-    setFieldValue(name, moment(value).format('YYYY-MM-DD'))
+    setFieldValue(name, moment(value).format('YYYY-MM-DD, HH:mm a'))
     setDate(value)
   }
   const configDatePicker = {
@@ -37,14 +39,14 @@ const DatePickerUI = ({
   }
   return ( 
           <LocalizationProvider dateAdapter={AdapterMoment}>
-            <DatePicker
+            <DateTimePicker
               {...configDatePicker}
               renderInput={(params) => <TextField {...params} />}
               >
-              </DatePicker>
+              </DateTimePicker>
               <FormHelperText>{configDatePicker.helperText}</FormHelperText>
           </LocalizationProvider>
    )
 }
-
-export default DatePickerUI
+ 
+export default DateTimePickerUI

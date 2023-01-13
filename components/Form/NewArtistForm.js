@@ -10,7 +10,7 @@ import { ref, uploadBytes } from 'firebase/storage'
 import UploadIcon from '@mui/icons-material/Upload'
 import { countryCodes } from '../../data/countryCodes'
 import SelectFieldUI from './SelectFieldUI'
-import DatePickerUI from './DatePickerUI'
+import DateTimePickerUI from './DateTimePickerUI'
 
 
 const NewArtistForm = ({userData, closeModal, prevId, dayId}) => {
@@ -110,12 +110,12 @@ const NewArtistForm = ({userData, closeModal, prevId, dayId}) => {
               {/* Init Day */}
               <div className="single__input">
                 <label htmlFor="initDay">Día de Inicio</label>
-                <DatePickerUI name="initialDay" label=""/>
+                <DateTimePickerUI name="initialDay" label=""/>
               </div>
               {/* End Day */}
               <div className="single__input">
                 <label htmlFor="endDay">Día de Finalización</label>
-                <DatePickerUI name="finalDay" label=""/>
+                <DateTimePickerUI name="finalDay" label=""/>
               </div>
               {/* Add Image Profile picture */}
               <div className="single__input image_input">
