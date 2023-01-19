@@ -89,11 +89,11 @@ import {
   }, [queryId])
 
   //Create new day
-  const createDay = async (name, date, desc, dayId) => {
+  const createDay = async (name, date, desc, initialHour, finalHour,  dayId) => {
     try {
       const collectionRef = collection(db, 'evento')
       const docRef = doc(collectionRef, dayId)
-      await setDoc(docRef, {name, date, desc, dayId})
+      await setDoc(docRef, {name, date, desc, initialHour, finalHour, dayId})
   } catch (error) {
     setLoading(false)
     setError(error)
@@ -111,11 +111,11 @@ const deleteDay = async (dayId) => {
   }
 }
   //Update Day
-  const updateDay = async (name, date, desc, dayId) => {
+  const updateDay = async (name, date, desc, initialHour, finalHour, dayId) => {
     try {
       const collectionRef = collection(db, 'evento')
       const docRef = doc(collectionRef, dayId)
-      await updateDoc(docRef, {name, date, desc, dayId})
+      await updateDoc(docRef, {name, date, desc, initialHour, finalHour, dayId})
   } catch (error) {
     setLoading(false)
     setError(error)

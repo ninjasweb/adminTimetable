@@ -2,6 +2,7 @@ import TextFieldUI from "./TextFieldUI"
 import { Formik, Form } from "formik"
 import * as Yup from "yup"
 import DatePickerUI from "./DatePickerUI"
+import TimePickerUI from "./TimePickerUI"
 import ButtonPrimary from "../Common/ButtonPrimary"
 import CloseIcon from '@mui/icons-material/Close'
 import { useUserContext } from "../../context/userContext"
@@ -16,10 +17,14 @@ const NewDayForm = ({closeModal, userData}) => {
     name: userData.dayId === undefined ? "" : userData.name,
     desc: userData.dayId === undefined ? "" : userData.desc,
     date: userData.dayId === undefined ? "" : userData.date,
+    initialHour: userData.dayId === undefined ? "" : userData.initialHour,
+    finalHour: userData.dayId === undefined ? "" : userData.finalHour,
   }
   const validationSchema = Yup.object().shape({
     name: Yup.string().required('El nombre es requerido'),
     date: Yup.date().typeError("La fecha es incorrecta").required('La fecha es obligatoria'),
+    initialHour: Yup.string().required('La hora inicial es requerida'),
+    finalHour: Yup.string().required('La hora final es requerida'),
   })
   //Create an unique id for the day  
   const id = Math.random().toString(36).substring(2, 5) + Math.random().toString(8).substring(2, 5)
@@ -29,9 +34,23 @@ const NewDayForm = ({closeModal, userData}) => {
     setDisabledButton(true)
     const dayId = values.name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,"").replace(/ /g, "-").concat(id)
     if(userData.dayId === undefined) {
-      await createDay(values.name, values.date, values.desc, dayId)
+      await createDay(
+        values.name, 
+        values.date, 
+        values.desc,
+        values.initialHour,
+        values.finalHour,
+        dayId
+        )
     } else {
-      await updateDay(values.name, values.date, values.desc, userData.dayId)
+      await updateDay(
+        values.name, 
+        values.date, 
+        values.desc,
+        values.initialHour,
+        values.finalHour,
+        userData.dayId
+        )
     }
     closeModal()
   }
@@ -67,6 +86,14 @@ const NewDayForm = ({closeModal, userData}) => {
               {/* Day Date */}
               <div className="single__input">
                 <DatePickerUI label="Fecha" name="date"/>
+              </div>
+              {/* Day Initial Hour */}
+              <div className="single__input">
+                <TimePickerUI label="Hora inicial" name="initialHour"/>
+              </div>
+              {/* Day Final Hour */}
+              <div className="single__input">
+                <TimePickerUI label="Hora final" name="finalHour"/>
               </div>
               {/* Create Day */}
               <div className="single__input">

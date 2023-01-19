@@ -28,6 +28,7 @@ const TimePickerUI = ({
     onChange: handleChange,
     value: selectedTime,
     defaultValue: null,
+    value : field.value,
   }
   if(meta && meta.touched && meta.error) {
     configTimePicker.error = true;
