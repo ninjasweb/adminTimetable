@@ -29,7 +29,7 @@ const DateTimePickerUI = ({
     type: 'date',
     fullWidth: true,
     onChange: handleDateChange,
-    value: date,
+    value: field.value ? moment(field.value, 'YYYY-MM-DD, HH:mm a').toDate() : null,
     defaultValue : null,
   }
   if (meta && meta.touched && meta.error) {

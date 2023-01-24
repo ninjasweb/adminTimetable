@@ -13,13 +13,15 @@ const Home = () => {
   const [userData, setUserData] = useState({})
   const [eventId , setEventId] = useState(null)
 
-  const handleModal = (name, date, desc, dayId) => {
+  const handleModal = (name, date, desc, dayId, initialHour, finalHour) => {
     setIsModalOpen(!isModalOpen)
     setUserData({
       name: name,
       desc: desc,
       date: date,
       dayId: dayId,
+      initialHour: initialHour,
+      finalHour: finalHour
     })
   }
 
@@ -47,6 +49,8 @@ const Home = () => {
               name={event.name}
               desc={event.desc}
               date={event.date}
+              initialHour={event.initialHour}
+              finalHour={event.finalHour}
               />
           )
         }) : <p>Aún no has agregado ningún evento.</p>

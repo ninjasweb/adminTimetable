@@ -5,7 +5,6 @@ import { useField, useFormikContext } from 'formik'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import moment from 'moment'
 import FormHelperText from '@mui/material/FormHelperText'
-import { useState } from 'react'
 
 const DatePickerUI = ({
   name,
@@ -13,12 +12,10 @@ const DatePickerUI = ({
   value,
   ...otherProps
 }) => {
-  const [date, setDate] = useState(value)
   const [field, meta] = useField(name)
   const { setFieldValue } = useFormikContext()
   const handleDateChange = (value) => {
     setFieldValue(name, moment(value).format('YYYY-MM-DD'))
-    setDate(value)
   }
   const configDatePicker = {
     ...field,
@@ -27,7 +24,7 @@ const DatePickerUI = ({
     type: 'date',
     fullWidth: true,
     onChange: handleDateChange,
-    value: date,
+    value: field.value ? moment(field.value, 'YYYY-MM-DD').toDate() : null,
     defaultValue : null,
   }
   if (meta && meta.touched && meta.error) {

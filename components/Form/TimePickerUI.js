@@ -3,7 +3,6 @@ import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment'
 import { TimePicker } from '@mui/x-date-pickers/TimePicker'
 import { useField, useFormikContext } from 'formik'
 import TextField from '@mui/material/TextField'
-import { useState } from 'react'
 import FormHelperText from '@mui/material/FormHelperText'
 import moment from 'moment'
 
@@ -13,11 +12,9 @@ const TimePickerUI = ({
   value,
   ...otherProps
 }) => {
-  const [selectedTime, setSelectedTime] = useState(new Date())
   const [field, meta] = useField(name)
   const { setFieldValue } = useFormikContext()
   const handleChange = (time) => {
-    setSelectedTime(time)
     setFieldValue(name, moment(time).format('HH:mm'))
   }
   const configTimePicker = {
@@ -26,9 +23,8 @@ const TimePickerUI = ({
     type: 'time',
     fullWidth: true,
     onChange: handleChange,
-    value: selectedTime,
+    value: field.value ? moment(field.value, 'HH:mm').toDate() : null,
     defaultValue: null,
-    value : field.value,
   }
   if(meta && meta.touched && meta.error) {
     configTimePicker.error = true;
@@ -37,7 +33,7 @@ const TimePickerUI = ({
   return (
     <LocalizationProvider dateAdapter={AdapterMoment}>
       <TimePicker
-        value={selectedTime}
+        {...configTimePicker}
         onChange={handleChange}
         renderInput={(params) => <TextField {...params} />}
       />

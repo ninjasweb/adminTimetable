@@ -109,12 +109,12 @@ const NewArtistForm = ({userData, closeModal, prevId, dayId}) => {
               </div>
               {/* Init Day */}
               <div className="single__input">
-                <label htmlFor="initDay">Día de Inicio</label>
+                <label htmlFor="initDay">Día de Inicio (MM/DD/AA)</label>
                 <DateTimePickerUI name="initialDay" label=""/>
               </div>
               {/* End Day */}
               <div className="single__input">
-                <label htmlFor="endDay">Día de Finalización</label>
+                <label htmlFor="endDay">Día de Finalización (MM/DD/AA)</label>
                 <DateTimePickerUI name="finalDay" label=""/>
               </div>
               {/* Add Image Profile picture */}
