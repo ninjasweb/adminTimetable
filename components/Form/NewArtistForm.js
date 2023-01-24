@@ -21,6 +21,11 @@ const NewArtistForm = ({userData, closeModal, prevId, dayId}) => {
 
 
   const uploadToClient = (e) => {
+    //Validate if the file size is less than 1MB
+    if(e.target.files[0].size > 1000000) {
+      alert("El tamaño del archivo es mayor a 1MB")
+      return false
+    }
     if(e.target.files && e.target.files[0]) {
       const i = e.target.files[0]
       console.log(i)
@@ -124,7 +129,8 @@ const NewArtistForm = ({userData, closeModal, prevId, dayId}) => {
                 <label className='uploadImageButton' htmlFor="image">
                   <div><UploadIcon/> Subir Imagen</div>
                 </label>
-                <input accept="image/*" type="file" name="image" id="image" onChange={uploadToClient}  />
+                {/* Add maximun file size 1 MB */}
+                <input accept="image/*"  type="file" name="image" id="image" onChange={uploadToClient}  />
               </div>
               {/* Create Artist */}
               <div className="single__input">
