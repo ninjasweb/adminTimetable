@@ -20,6 +20,7 @@ const TimePickerUI = ({
   const configTimePicker = {
     ...field,
     ...otherProps,
+    label: label,
     type: 'time',
     fullWidth: true,
     onChange: handleChange,

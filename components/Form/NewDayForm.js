@@ -85,15 +85,15 @@ const NewDayForm = ({closeModal, userData}) => {
               </div>
               {/* Day Date */}
               <div className="single__input">
-                <DatePickerUI label="Fecha" name="date"/>
+                <DatePickerUI label="Fecha (MM/DD/AAAA)" name="date"/>
               </div>
               {/* Day Initial Hour */}
               <div className="single__input">
-                <TimePickerUI label="Hora inicial" name="initialHour"/>
+                <TimePickerUI label="Hora de inicio" name="initialHour"/>
               </div>
               {/* Day Final Hour */}
               <div className="single__input">
-                <TimePickerUI label="Hora final" name="finalHour"/>
+                <TimePickerUI label="Hora finalización" name="finalHour"/>
               </div>
               {/* Create Day */}
               <div className="single__input">
