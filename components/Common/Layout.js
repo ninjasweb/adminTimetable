@@ -1,8 +1,8 @@
-import Footer from './Footer'
-import TopBar from './TopBar'
-import Head from 'next/head'
+import Footer from "./Footer"
+import TopBar from "./TopBar"
+import Head from "next/head"
 
-const Layout = ({children, title}) => {
+const Layout = ({ children, title }) => {
   return (
     <>
       <div className="layout">
@@ -10,14 +10,12 @@ const Layout = ({children, title}) => {
           <title>{title}</title>
         </Head>
         <TopBar title={title} />
-        <div className="body__layout">
-          {children}
-        </div>
-        <Footer/>
+        <div className="body__layout">{children}</div>
+        <Footer />
       </div>
       <style jsx>{`
         .layout {
-          width: 100% ;
+          width: 100%;
           height: 100%;
         }
 
@@ -26,9 +24,9 @@ const Layout = ({children, title}) => {
           max-width: 600px;
           margin: 0 auto;
         }
-        `}</style>
+      `}</style>
     </>
-   );
+  )
 }
- 
-export default Layout;
+
+export default Layout
