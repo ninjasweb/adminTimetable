@@ -23,6 +23,7 @@ const EventInfoForm = () => {
     <div
       style={{
         padding: "20px",
+        paddingBottom: "80px",
       }}
     >
       {eventInfo && eventInfo[0].name ? (

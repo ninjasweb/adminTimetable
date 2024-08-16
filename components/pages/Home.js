@@ -7,11 +7,11 @@ import Modal from "../Common/Modal"
 import NewDayForm from "../Form/NewDayForm"
 
 const Home = () => {
-  const {collectionGroup, deleteDay } = useUserContext()
+  const { collectionGroup, deleteDay } = useUserContext()
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
   const [userData, setUserData] = useState({})
-  const [eventId , setEventId] = useState(null)
+  const [eventId, setEventId] = useState(null)
 
   const handleModal = (name, date, desc, dayId, initialHour, finalHour) => {
     setIsModalOpen(!isModalOpen)
@@ -21,7 +21,7 @@ const Home = () => {
       date: date,
       dayId: dayId,
       initialHour: initialHour,
-      finalHour: finalHour
+      finalHour: finalHour,
     })
   }
 
@@ -35,31 +35,44 @@ const Home = () => {
     deleteDay(eventId)
     setIsDeleteModalOpen(!isDeleteModalOpen)
   }
-  
+
   return (
     <>
       <div className="home__container">
-        {collectionGroup && collectionGroup.length > 0 ? collectionGroup.map((event)=>{
-          return (
-            <DayCard 
-              handleModal={handleModal} 
-              handleDeleteModal={handleDeleteModal}
-              key={event.dayId} 
-              dayId={event.dayId} 
-              name={event.name}
-              desc={event.desc}
-              date={event.date}
-              initialHour={event.initialHour}
-              finalHour={event.finalHour}
+        {collectionGroup && collectionGroup.length > 0 ? (
+          collectionGroup.map((event) => {
+            return (
+              <DayCard
+                handleModal={handleModal}
+                handleDeleteModal={handleDeleteModal}
+                key={event.dayId}
+                dayId={event.dayId}
+                name={event.name}
+                desc={event.desc}
+                date={event.date}
+                initialHour={event.initialHour}
+                finalHour={event.finalHour}
               />
-          )
-        }) : <p>Aún no has agregado ningún evento.</p>
-      }
-        {isModalOpen ? <Modal><NewDayForm userData={userData} closeModal={handleModal} /></Modal> : null}
-        <AddButton onClick={handleModal}/>
+            )
+          })
+        ) : (
+          <p>Aún no has agregado ningún evento.</p>
+        )}
+        {isModalOpen ? (
+          <Modal>
+            <NewDayForm userData={userData} closeModal={handleModal} />
+          </Modal>
+        ) : null}
+        <AddButton onClick={handleModal} />
 
-        {isDeleteModalOpen ? <Modal><DeleteAlert handleDeleteModal={handleDeleteModal} handleDelete={handleDelete}/></Modal> : null}
-
+        {isDeleteModalOpen ? (
+          <Modal>
+            <DeleteAlert
+              handleDeleteModal={handleDeleteModal}
+              handleDelete={handleDelete}
+            />
+          </Modal>
+        ) : null}
       </div>
       <style jsx>{`
         .home__container {
@@ -70,15 +83,14 @@ const Home = () => {
           grid-gap: 1rem;
           padding: 1rem;
           justify-items: center;
-          padding-bottom: 4rem;
         }
 
         .home__container p {
           color: #fff;
         }
-        `}</style>
+      `}</style>
     </>
-   )
+  )
 }
- 
+
 export default Home
